@@ -1,0 +1,8 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="backdrop_height">30dp</dimen>
+    <dimen name="detail_backdrop_height">250dp</dimen>
+    <dimen name="label_size">20dp</dimen>
+    <dimen name="data_size">16dp</dimen>
+    <dimen name="synposis_size">14dp</dimen>
+</resources>

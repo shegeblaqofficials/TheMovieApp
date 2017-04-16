@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">TheMovieApp</string>
+    <string name="string_poular"> Popular Movies </string>
+    <string name="string_toprated"> Top Rated Movies </string>
+    <string name="backdrop_title">Movie Title</string>
+    <string name="movie_title">Title</string>
+    <string name="releasedate_title">Release Date</string>
+    <string name="rating_title">Rating</string>
+    <string name="Synopsis_title">Overview</string>
+</resources>
