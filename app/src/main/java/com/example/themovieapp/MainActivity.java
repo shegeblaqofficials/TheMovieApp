@@ -54,27 +54,27 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(mAdapter);
         recyclerView.hasFixedSize();
 
-//        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
-//            @Override
-//            public void onClick(View view, int position) {
-//
-//                Movies movie = MovieList.get(position);
-//
-//                ///send data to the movie detail
-//                Intent PutDataIntent =new Intent(MainActivity.this,MovieDetails.class);
-//                ////pass all the data to be passed
-//                PutDataIntent.putExtra("Backdrop",movie.getBackdrop());
-//                PutDataIntent.putExtra("Title", movie.getTitle());
-//                PutDataIntent.putExtra("ReleaseDate",movie.getReleaseDate());
-//                PutDataIntent.putExtra("Rating", movie.getRating());
-//                PutDataIntent.putExtra("Synopsis",movie.getSynopsis());
-//            }
-//
-//            @Override
-//            public void onLongClick(View view, int position) {
-//
-//            }
-//        }));
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+
+                Movies movie = MovieList.get(position);
+
+                ///send data to the movie detail
+                Intent PutDataIntent =new Intent(MainActivity.this,MovieDetails.class);
+                ////pass all the data to be passed
+                PutDataIntent.putExtra("Backdrop",movie.getBackdrop());
+                PutDataIntent.putExtra("Title", movie.getTitle());
+                PutDataIntent.putExtra("ReleaseDate",movie.getReleaseDate());
+                PutDataIntent.putExtra("Rating", movie.getRating());
+                PutDataIntent.putExtra("Synopsis",movie.getSynopsis());
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
 
 
         ///fetch movie posters
@@ -117,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
     ////method to fetch from the api with volley
     public void FetchMovies(String BaseUrl) {
 
+
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, BaseUrl, new
 
                 Response.Listener<JSONObject>() {
@@ -128,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
 
                         try {
                             JSONArray obj = response.getJSONArray("results");
+
                             ////for the array
                             Movies item;
 
@@ -181,12 +183,14 @@ public class MainActivity extends AppCompatActivity {
                 mProgressBar.setVisibility(View.GONE);
             }
         });
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(req);
     }
 
 
-//    public interface ClickListener {
-//        void onLongClick(View child, int childPosition);
-//
-//        void onClick(View child, int childPosition);
-//    }
+    public interface ClickListener {
+        void onLongClick(View child, int childPosition);
+
+        void onClick(View child, int childPosition);
+    }
 }
