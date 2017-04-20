@@ -1,11 +1,13 @@
 package com.example.themovieapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -38,11 +40,29 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(MovieAdapter.MyViewHolder holder, int position) {
 
-         Movies movieItem = MovieList.get(position);
+         final Movies movieItem = MovieList.get(position);
+
         Picasso.with(mContext)
                 .load(movieItem.getPoster())
                 .placeholder(R.drawable.placeholder)
                 .into(holder.Poster);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // display a toast with person name on item click
+
+                Intent PutDataIntent = new Intent(mContext,MovieDetails.class);
+                ////pass all the data to be passed
+                PutDataIntent.putExtra("Backdrop",movieItem.getBackdrop());
+                PutDataIntent.putExtra("Title", movieItem.getTitle());
+                PutDataIntent.putExtra("ReleaseDate",movieItem.getReleaseDate());
+                PutDataIntent.putExtra("Rating", movieItem.getRating());
+                PutDataIntent.putExtra("Synopsis",movieItem.getSynopsis());
+
+                mContext.startActivity(PutDataIntent);
+            }
+        });
     }
 
     @Override
@@ -59,6 +79,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
 
             Poster=(ImageView) itemView.findViewById(R.id.poster);
         }
+    }
+
+    private void SentDataTonextPage(){
+
     }
 
 

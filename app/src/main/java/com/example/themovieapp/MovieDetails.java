@@ -34,11 +34,8 @@ public class MovieDetails extends AppCompatActivity {
         Release_tv = (TextView) findViewById(R.id.releaseDate);
         Rating_tv = (TextView) findViewById(R.id.rating);
         Synopsis_tv = (TextView) findViewById(R.id.synopsis);
-        Backdrop_tv = (TextView) findViewById(R.id.backdrop_title);
 
         Backdrop_img = (ImageView) findViewById(R.id.backdrop);
-
-        initCollapsingToolbar();
 
         ///get the sent in data
         Intent SentData = getIntent();
@@ -60,11 +57,11 @@ public class MovieDetails extends AppCompatActivity {
         }
 
         ///Pass the data into view
-        SetData(Backdrop,Title,ReleaseDate,Rating,Synopsis);
+        SetData(Title,ReleaseDate,Rating,Synopsis);
 
     }
 
-    private void SetData(String Backdrop,String Title, String ReleaseDate, double Rating, String Synopsis)
+    private void SetData(String Title, String ReleaseDate, double Rating, String Synopsis)
     {
         //set the back drop image with picasso
         Picasso.with(this)
@@ -73,7 +70,6 @@ public class MovieDetails extends AppCompatActivity {
                 .into(Backdrop_img);
 
         ///set other text view
-        Backdrop_tv.setText(Title);
         Title_tv.setText(Title);
         Release_tv.setText(ReleaseDate);
         Rating_tv.setText(""+Rating);
@@ -81,31 +77,4 @@ public class MovieDetails extends AppCompatActivity {
 
     }
 
-    private void initCollapsingToolbar() {
-        final CollapsingToolbarLayout collapsingToolbar =
-                (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle(" ");
-        AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
-        appBarLayout.setExpanded(true);
-
-        // hiding & showing the title when toolbar expanded & collapsed
-        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            boolean isShow = false;
-            int scrollRange = -1;
-
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                if (scrollRange == -1) {
-                    scrollRange = appBarLayout.getTotalScrollRange();
-                }
-                if (scrollRange + verticalOffset == 0) {
-                    collapsingToolbar.setTitle(getString(R.string.app_name));
-                    isShow = true;
-                } else if (isShow) {
-                    collapsingToolbar.setTitle(" ");
-                    isShow = false;
-                }
-            }
-        });
-    }
 }

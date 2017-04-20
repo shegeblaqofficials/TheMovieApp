@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -47,35 +48,13 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
         mAdapter = new MovieAdapter(this, MovieList);
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),2);
+        gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL); // set Horizontal Orientation
+        recyclerView.setLayoutManager(gridLayoutManager); // set LayoutManager to RecyclerView
 
-        recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
-        recyclerView.hasFixedSize();
-
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-
-                Movies movie = MovieList.get(position);
-
-                ///send data to the movie detail
-                Intent PutDataIntent =new Intent(MainActivity.this,MovieDetails.class);
-                ////pass all the data to be passed
-                PutDataIntent.putExtra("Backdrop",movie.getBackdrop());
-                PutDataIntent.putExtra("Title", movie.getTitle());
-                PutDataIntent.putExtra("ReleaseDate",movie.getReleaseDate());
-                PutDataIntent.putExtra("Rating", movie.getRating());
-                PutDataIntent.putExtra("Synopsis",movie.getSynopsis());
-            }
-
-            @Override
-            public void onLongClick(View view, int position) {
-
-            }
-        }));
-
+        recyclerView.setHasFixedSize(true);
 
         ///fetch movie posters
         FetchMovies(AppConfig.PopularBaseUrl);
