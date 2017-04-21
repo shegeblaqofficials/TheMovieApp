@@ -79,12 +79,16 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_popular) {
 
+            ///before fetch another clear list
+            MovieList.clear();
             ///fetch popular movies
             FetchMovies(AppConfig.PopularBaseUrl);
         }
 
         if (id == R.id.action_top_rated) {
 
+            ///before fetch another clear list
+            MovieList.clear();
             ///fetch top rated movies
             FetchMovies(AppConfig.TopRateBaseUrl);
         }
