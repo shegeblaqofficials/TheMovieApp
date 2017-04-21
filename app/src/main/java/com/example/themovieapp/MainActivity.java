@@ -169,11 +169,4 @@ public class MainActivity extends AppCompatActivity {
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(req);
     }
-
-
-    public interface ClickListener {
-        void onLongClick(View child, int childPosition);
-
-        void onClick(View child, int childPosition);
-    }
 }
