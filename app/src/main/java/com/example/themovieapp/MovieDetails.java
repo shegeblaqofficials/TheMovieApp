@@ -11,15 +11,22 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MovieDetails extends AppCompatActivity {
 
-    TextView Title_tv, Release_tv, Rating_tv, Synopsis_tv, Backdrop_tv;
-    ImageView Backdrop_img;
     private String Backdrop;
     private String Title;
     private String ReleaseDate;
     private double Rating;
     private String Synopsis;
+
+    @BindView(R.id.movie_title)TextView Title_tv;
+    @BindView(R.id.releaseDate)TextView Release_tv;
+    @BindView(R.id.rating)TextView Rating_tv;
+    @BindView(R.id.synopsis)TextView Synopsis_tv;
+    @BindView(R.id.backdrop)ImageView Backdrop_img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +36,7 @@ public class MovieDetails extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ///find the view
-        Title_tv = (TextView) findViewById(R.id.title);
-        Release_tv = (TextView) findViewById(R.id.releaseDate);
-        Rating_tv = (TextView) findViewById(R.id.rating);
-        Synopsis_tv = (TextView) findViewById(R.id.synopsis);
-
-        Backdrop_img = (ImageView) findViewById(R.id.backdrop);
+        ButterKnife.bind(this);
 
         ///get the sent in data
         Intent SentData = getIntent();
@@ -67,6 +68,7 @@ public class MovieDetails extends AppCompatActivity {
         Picasso.with(this)
                 .load(Backdrop)
                 .placeholder(R.drawable.placeholder)
+                .error(R.drawable.error_placeholder)
                 .into(Backdrop_img);
 
         ///set other text view
