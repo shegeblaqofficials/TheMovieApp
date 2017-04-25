@@ -3,6 +3,7 @@ package com.example.themovieapp;
 import android.content.Intent;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -28,6 +29,8 @@ public class MovieDetails extends AppCompatActivity {
     @BindView(R.id.synopsis)TextView Synopsis_tv;
     @BindView(R.id.backdrop)ImageView Backdrop_img;
 
+    private CollapsingToolbarLayout collapsingToolbarLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +39,16 @@ public class MovieDetails extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         ButterKnife.bind(this);
+
+        ViewCompat.setTransitionName(findViewById(R.id.app_bar_layout), Backdrop);
+        supportPostponeEnterTransition();
+
+        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        collapsingToolbarLayout.setTitle(Title);
+        collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(android.R.color.transparent));
 
         ///get the sent in data
         Intent SentData = getIntent();
@@ -59,6 +71,8 @@ public class MovieDetails extends AppCompatActivity {
 
         ///Pass the data into view
         SetData(Title,ReleaseDate,Rating,Synopsis);
+
+
 
     }
 
