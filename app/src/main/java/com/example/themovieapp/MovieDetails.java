@@ -1,9 +1,13 @@
 package com.example.themovieapp;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -39,16 +43,10 @@ public class MovieDetails extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         ButterKnife.bind(this);
-
-        ViewCompat.setTransitionName(findViewById(R.id.app_bar_layout), Backdrop);
-        supportPostponeEnterTransition();
-
-        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbarLayout.setTitle(Title);
-        collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(android.R.color.transparent));
 
         ///get the sent in data
         Intent SentData = getIntent();
@@ -57,7 +55,7 @@ public class MovieDetails extends AppCompatActivity {
             Backdrop = SentData.getStringExtra("Backdrop");
         }
         if(SentData.hasExtra("Title")) {
-           Title = SentData.getStringExtra("Title");
+            Title = SentData.getStringExtra("Title");
         }
         if(SentData.hasExtra("ReleaseDate")) {
             ReleaseDate = SentData.getStringExtra("ReleaseDate");
@@ -69,10 +67,15 @@ public class MovieDetails extends AppCompatActivity {
             Synopsis = SentData.getStringExtra("Synopsis");
         }
 
+        ViewCompat.setTransitionName(findViewById(R.id.app_bar_layout), Backdrop);
+        supportPostponeEnterTransition();
+
+        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        collapsingToolbarLayout.setTitle(Title);
+        collapsingToolbarLayout.setExpandedTitleColor(ContextCompat.getColor(this, android.R.color.transparent));
+
         ///Pass the data into view
         SetData(Title,ReleaseDate,Rating,Synopsis);
-
-
 
     }
 
@@ -92,5 +95,6 @@ public class MovieDetails extends AppCompatActivity {
         Synopsis_tv.setText(Synopsis);
 
     }
+
 
 }
