@@ -132,6 +132,10 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        if (id == R.id.action_favorite) {
+            ///show the window
+
+        }
         if (id == R.id.action_sort) {
             ///show the window
             sortPopUp();
@@ -141,6 +145,10 @@ public class MainActivity extends AppCompatActivity
 
     ////method to fetch from the api with volley
     public List<Movies> FetchMovies(String BaseUrl) {
+
+        //show progress bar
+        mProgressBar.setVisibility(View.VISIBLE);
+
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, BaseUrl, new
 
                 Response.Listener<JSONObject>() {
@@ -176,6 +184,9 @@ public class MainActivity extends AppCompatActivity
 
                                 ///set the data object into the array
                                 MovieList.add(item);
+
+                                //hide progress bar
+                                mProgressBar.setVisibility(View.GONE);
                             }
 
                             mAdapter.notifyDataSetChanged();
@@ -216,7 +227,6 @@ public class MainActivity extends AppCompatActivity
                 }
                 else
                 {
-                    mProgressBar.setVisibility(View.VISIBLE);
                     forceLoad();
                 }
             }

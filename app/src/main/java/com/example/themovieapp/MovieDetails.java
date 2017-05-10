@@ -11,8 +11,10 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -26,6 +28,7 @@ public class MovieDetails extends AppCompatActivity {
     private String ReleaseDate;
     private double Rating;
     private String Synopsis;
+    private int MovieID;
 
     @BindView(R.id.movie_title)TextView Title_tv;
     @BindView(R.id.releaseDate)TextView Release_tv;
@@ -67,6 +70,10 @@ public class MovieDetails extends AppCompatActivity {
             Synopsis = SentData.getStringExtra("Synopsis");
         }
 
+        if(SentData.hasExtra("MovieID")) {
+            MovieID = SentData.getIntExtra("MovieID",0);
+        }
+
         ViewCompat.setTransitionName(findViewById(R.id.app_bar_layout), Backdrop);
         supportPostponeEnterTransition();
 
@@ -93,8 +100,22 @@ public class MovieDetails extends AppCompatActivity {
         Release_tv.setText(ReleaseDate);
         Rating_tv.setText(""+Rating);
         Synopsis_tv.setText(Synopsis);
-
     }
 
+    public void favourite(View view) {
 
+        Toast.makeText(this, "I will add this movie to your collections", Toast.LENGTH_LONG).show();
+    }
+
+    public void PlayTrailer(View view) {
+
+        Toast.makeText(this, " I will pay video", Toast.LENGTH_SHORT).show();
+    }
+
+    public void ReadReview(View view) {
+        Toast.makeText(this, "I want to read a review", Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(MovieDetails.this, Review.class);
+                startActivity(intent);
+    }
 }

@@ -40,13 +40,13 @@
                 android:layout_height="?attr/actionBarSize"
                 android:elevation="7dp"
                 app:layout_collapseMode="pin"
+                app:titleTextColor="@color/colorPrimaryDark"
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
     </android.support.design.widget.AppBarLayout>
 
-    <!--<include layout="@layout/content_moviedetails" />-->
 
         <android.support.v4.widget.NestedScrollView
             android:id="@+id/scroll"
@@ -58,7 +58,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:id="@+id/details_content">
 
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
@@ -197,8 +198,93 @@
 
                 </android.support.v7.widget.CardView>
 
+
+                <!-- this for the watch video -->
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:elevation="7dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp"
+                        android:onClick="ReadReview">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:text="Read Movie Review"
+                            android:textSize="24dp"
+                            android:layout_weight="2"
+                            android:gravity="center"/>
+
+                        <ImageView
+                            android:id="@+id/imagereadmore"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/more"
+                            android:layout_weight="1"/>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <!-- end of the read more review -->
+
+            <!-- this for the watch video -->
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:elevation="7dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp"
+                        android:onClick="PlayTrailer">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:text="Watch Movie Trailer"
+                            android:textSize="24dp"
+                            android:layout_weight="2"
+                            android:gravity="center"/>
+
+                        <ImageView
+                            android:id="@+id/imagewatchtrailer"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/playvideo"
+                            android:layout_weight="1"/>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <!-- end of the watch video -->
+
             </LinearLayout>
 
         </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        app:layout_anchor="@id/details_content"
+        android:src="@drawable/start_outline"
+        android:background="@color/colorAccent"
+        app:layout_anchorGravity="top|right|end"
+        android:onClick="favourite"/>
 
 </android.support.design.widget.CoordinatorLayout>

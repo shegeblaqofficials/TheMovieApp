@@ -60,6 +60,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
                 PutDataIntent.putExtra("ReleaseDate",movieItem.getReleaseDate());
                 PutDataIntent.putExtra("Rating", movieItem.getRating());
                 PutDataIntent.putExtra("Synopsis",movieItem.getSynopsis());
+                PutDataIntent.putExtra("MovieID",movieItem.getMovieID());
 
                 mContext.startActivity(PutDataIntent);
             }

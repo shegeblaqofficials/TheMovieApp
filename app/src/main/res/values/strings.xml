@@ -7,4 +7,6 @@
     <string name="releasedate_title">Release Date</string>
     <string name="rating_title">Rating</string>
     <string name="Synopsis_title">Overview</string>
+    <string name="favorite">Favorite Movie</string>
+    <string name="settings">Settings</string>
 </resources>
