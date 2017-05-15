@@ -188,7 +188,7 @@
                                     android:id="@+id/synopsis"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:text="Widget to your layout and place other UI widgets like TextViews, ImageViews inside it. You can notice that the below CardView widget contains a single"
+                                    tools:text="Widget to your layout and place other UI widgets like TextViews, ImageViews inside it. You can notice that the below CardView widget contains a single"
                                     android:textSize="@dimen/synposis_size" />
                             </LinearLayout>
 
@@ -246,24 +246,21 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="16dp"
-                        android:onClick="PlayTrailer">
+                        android:orientation="vertical"
+                        android:padding="16dp">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="50dp"
-                            android:text="Watch Movie Trailer"
-                            android:textSize="24dp"
-                            android:layout_weight="2"
-                            android:gravity="center"/>
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recycler_view_video"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
-                        <ImageView
-                            android:id="@+id/imagewatchtrailer"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:src="@drawable/playvideo"
-                            android:layout_weight="1"/>
+                        </android.support.v7.widget.RecyclerView>
+
+                        <ProgressBar
+                            android:id="@+id/progressbar_video"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"/>
 
                     </LinearLayout>
 
@@ -281,10 +278,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:clickable="true"
-        app:layout_anchor="@id/details_content"
-        android:src="@drawable/start_outline"
-        android:background="@color/colorAccent"
-        app:layout_anchorGravity="top|right|end"
+        app:layout_anchor="@id/app_bar_layout"
+        android:src="@drawable/ic_heart_outline"
+        android:backgroundTint="@color/colorAccent"
+        app:layout_anchorGravity="bottom|right|end"
         android:onClick="favourite"/>
 
 </android.support.design.widget.CoordinatorLayout>

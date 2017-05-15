@@ -4,61 +4,67 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
 import Utilities.AppConfig;
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class Review extends AppCompatActivity {
 
-    @BindView(R.id.movie_title)TextView Review_tv;
+    @BindView(R.id.review)TextView Review_tv;
 
     private static String SAVE_INSTANCE_KEY="key";
+
+    private static String URL="Just my url";
+
+    static final String STATE_SCORE = "10s";
+    static final String STATE_LEVEL = "10s";
+    private String mCurrentScore ="Real Score";
+    private  String mCurrentLevel="Another score";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review);
 
-        //check our onsavestance
-        if(savedInstanceState != null)
-        {
-            if(savedInstanceState.containsKey(SAVE_INSTANCE_KEY)){
-                String Review = savedInstanceState.getString(SAVE_INSTANCE_KEY);
-                ///set our text
-                Review_tv.setText(Review);
-            }
+        ButterKnife.bind(this);
+
+        // Check whether we're recreating a previously destroyed instance
+        if (savedInstanceState != null) {
+            // Restore value of members from saved state
+            mCurrentScore = savedInstanceState.getString(STATE_SCORE);
+            mCurrentLevel = savedInstanceState.getString(STATE_LEVEL);
+
+            Review_tv.setText("Level"+mCurrentLevel+"and Score"+mCurrentScore);
+        } else {
+            // Probably initialize members with default values for a new instance
+            Review_tv.setText("Level 0 and Score 0");
         }
 
+
     }
+
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        // Save the user's current game state
+        savedInstanceState.putString(STATE_SCORE, mCurrentScore);
+        savedInstanceState.putString(STATE_LEVEL, mCurrentLevel);
 
-        ///build url
-        Uri builtUri = Uri.parse(AppConfig.BASE_URL).buildUpon()
-                .appendPath(AppConfig.REVIEW_QUERY)
-                .appendPath(AppConfig.API_KEY)
-                .build();
 
-        ///convert to string
-        URL url =null;
-        try {
-            url= new URL(builtUri.toString());
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-
-        outState.putString(SAVE_INSTANCE_KEY, FetchReviw(url));
+        // Always call the superclass so it can save the view hierarchy state
+        super.onSaveInstanceState(savedInstanceState);
     }
 
-    private String FetchReviw(URL url)
+    private String FetchReviw(String url)
     {
-        String Review=url.toString();
+        String Review=url;
 
         return Review;
     }
+
 }

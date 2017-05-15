@@ -52,10 +52,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
             @Override
             public void onClick(View view) {
                 // display a toast with person name on item click
-
                 Intent PutDataIntent = new Intent(mContext,MovieDetails.class);
                 ////pass all the data to be passed
                 PutDataIntent.putExtra("Backdrop",movieItem.getBackdrop());
+                PutDataIntent.putExtra("Poster", movieItem.getPoster());
                 PutDataIntent.putExtra("Title", movieItem.getTitle());
                 PutDataIntent.putExtra("ReleaseDate",movieItem.getReleaseDate());
                 PutDataIntent.putExtra("Rating", movieItem.getRating());

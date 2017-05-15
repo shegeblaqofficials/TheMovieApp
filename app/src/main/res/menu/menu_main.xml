@@ -3,10 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.themovieapp.MainActivity">
     <item
-        android:id="@+id/action_sort"
+        android:id="@+id/action_popular"
         android:orderInCategory="100"
-        android:title="@string/string_poular"
-        app:showAsAction="always"
+        android:title="@string/string_popular"
+        app:showAsAction="never"
+        android:icon="@drawable/ic_action_name"/>
+    <item
+        android:id="@+id/action_toprated"
+        android:orderInCategory="100"
+        android:title="@string/string_toprated"
+        app:showAsAction="never"
         android:icon="@drawable/ic_action_name"/>
     <item
         android:id="@+id/action_favorite"
